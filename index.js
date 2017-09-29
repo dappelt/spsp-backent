@@ -14,11 +14,11 @@ router.get('/v1/receivers/:user', function * () {
   this.body = {
     type: 'payee',
     name: 'Somebody McPerson',
-    account: 'https://example.com/accounts/' + this.params.user,
-    currencySymbol: '£',
-    currencyCode: 'GBP',
-    imageUrl: 'https://nexus.justmoon.com/api/users/sharafian/profilepic',
-    paymentsUrl: 'http://localhost:6666/v1/receivers/' + this.params.user + '/payments/:id'
+    account: 'http://172.88.0.1:3001/accounts/' + this.params.user,
+    currencySymbol: '$',
+    currencyCode: 'USD',
+    imageUrl: 'http://nexus.justmoon.com/api/users/sharafian/profilepic',
+    paymentsUrl: 'http://172.88.0.1:6666/v1/receivers/' + this.params.user + '/payments/:id'
   }
 })
 
@@ -26,13 +26,13 @@ router.get('/v1/receivers/invoices/:id', function * () {
   console.log(date(), getting, 'receivers invoices', this.params.id)
   this.body = {
     type: 'invoice',
-    account: 'https://example.com/accounts/' + this.params.id,
-    currencySymbol: '£',
-    currencyCode: 'GBP',
+    account: 'http://172.88.0.1:3001/accounts/' + this.params.user,
+    currencySymbol: '$',
+    currencyCode: 'USD',
     amount: '10.00',
     status: 'unpaid',
-    invoiceInfo: 'https://example.com',
-    paymentsUrl: 'http://localhost:6666/v1/receivers/invoices/' + this.params.id
+    invoiceInfo: 'http://example.com',
+    paymentsUrl: 'http://172.88.0.1:6666/v1/receivers/invoices/' + this.params.id
   }
 })
 
@@ -48,6 +48,10 @@ router.put('/v1/receivers/invoices/:id', function * () {
 
 router.post('/v1/invoices', function * () {
   console.log(date(), posting, 'invoice')
+  this.status = 200
+})
+
+router.post('/notifications', function * () {
   this.status = 200
 })
 
